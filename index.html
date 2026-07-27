@@ -59,8 +59,14 @@
             <h3 class="text-xl font-bold font-mono text-green-400 mb-2">✉️ Kirim Pesan</h3>
             <p class="text-slate-400 text-xs mb-4">Pesan Anda akan langsung masuk ke email Ferrel.</p>
             
-            <!-- FORM ACTION (Menggunakan Formspree) -->
-            <form action="https://formspree.io/f/xwvgajrv" method="POST" class="space-y-4">
+            <!-- FORM ACTION (Menggunakan FormSubmit) -->
+            <form action="https://formsubmit.co/ferrelfortinovs@gmail.com" method="POST" class="space-y-4">
+                
+                <!-- Konfigurasi FormSubmit -->
+                <input type="hidden" name="_to" value="ferrelfortinovs@gmail.com">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://zico1411.github.io/zico-s-portfolio/index.html">
+                
                 <div>
                     <label class="block text-xs font-mono text-slate-300 mb-1" for="email">Email Anda</label>
                     <input type="email" name="email" id="email" required placeholder="nama@email.com" 
@@ -71,9 +77,6 @@
                     <textarea name="message" id="message" rows="4" required placeholder="Halo Ferrel, saya tertarik dengan portofolio Anda..." 
                               class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-green-400 resize-none"></textarea>
                 </div>
-                
-                <!-- Input tersembunyi agar pengirim diarahkan kembali ke portfolio setelah sukses mengirim -->
-                <input type="hidden" name="_next" value="https://zico1411.github.io/zico-s-portfolio/index.html">
                 
                 <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-slate-950 font-bold py-2.5 rounded-lg text-sm transition duration-200 cursor-pointer">
                     Kirim Sekarang
