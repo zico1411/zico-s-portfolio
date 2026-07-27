@@ -79,29 +79,42 @@
             border-color: rgba(34, 197, 94, 0.75);
         }
 
-        /* --- CYBER RUNNER SIMULATION INSIDE --- */
-        @keyframes cyber-run-jump {
-            0% { transform: translateY(0) scaleX(1); }
-            10% { transform: translateY(2px) scaleX(1.1) scaleY(0.9); }
-            20% { transform: translateY(-28px) scaleX(0.95) scaleY(1.05); }
-            50% { transform: translateY(-34px) rotate(-5deg); }
-            75% { transform: translateY(-15px) scaleX(1); }
-            88% { transform: translateY(0) scaleX(1.1) scaleY(0.9); }
-            100% { transform: translateY(0) scaleX(1); }
+        /* --- VECTOR ISOMETRIC INTERACTIVE ANIMATIONS (HIGH SPEED) --- */
+        @keyframes pulseShield {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(34,197,94,0.6)); }
+            50% { transform: scale(1.03) translateY(-2px); filter: drop-shadow(0 0 22px rgba(34,197,94,1)); }
         }
-        
-        @keyframes obstacles-loop {
-            0% { transform: translateX(290px); }
-            100% { transform: translateX(-50px); }
+        @keyframes dataRapidFlow {
+            0% { stroke-dashoffset: 32; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes serverLedBlink {
+            0%, 100% { fill: #166534; filter: none; }
+            50% { fill: #22c55e; filter: drop-shadow(0 0 4px #4ade80); }
+        }
+        @keyframes codeTerminalScroll {
+            0% { stroke-dashoffset: 30; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes floatLabNode {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes radarScanRotation {
+            0% { stroke-dashoffset: 0; opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { stroke-dashoffset: 50; opacity: 0.3; }
         }
 
-        .cyber-character {
-            animation: cyber-run-jump 0.85s infinite cubic-bezier(0.4, 0, 0.2, 1);
-            text-shadow: 0 0 12px rgba(34, 197, 94, 1);
-        }
-        .gd-spike-1 { animation: obstacles-loop 2.2s infinite linear; }
-        .gd-spike-2 { animation: obstacles-loop 2.2s infinite linear; animation-delay: 0.7s; }
-        .gd-spike-3 { animation: obstacles-loop 2.2s infinite linear; animation-delay: 1.45s; }
+        /* Class Animasi untuk Element SVG */
+        .anim-shield-node { animation: pulseShield 2.5s infinite ease-in-out; transform-origin: center; }
+        .data-stream-wire { stroke: #22c55e; stroke-dasharray: 8, 4; animation: dataRapidFlow 1s linear infinite; }
+        .led-indicator-1 { animation: serverLedBlink 0.7s infinite steps(2); }
+        .led-indicator-2 { animation: serverLedBlink 1.1s infinite steps(2); animation-delay: 0.2s; }
+        .led-indicator-3 { animation: serverLedBlink 0.5s infinite steps(2); animation-delay: 0.3s; }
+        .terminal-feed-line { stroke: #4ade80; stroke-dasharray: 5, 2; animation: codeTerminalScroll 1.5s linear infinite; }
+        .cyber-node-float { animation: floatLabNode 4s infinite ease-in-out; }
+        .radar-pulse-ring { stroke: #22c55e; stroke-dasharray: 10, 5; animation: radarScanRotation 3s linear infinite; }
     </style>
 </head>
 <body class="gd-main-bg text-slate-100 font-sans min-h-screen relative overflow-x-hidden select-none">
@@ -148,27 +161,83 @@
                 </div>
             </div>
 
-            <!-- Kolom Mini Game GD Stage & Box Animasi -->
-            <div class="flex flex-col items-center justify-center gap-6">
-                <!-- Box Utama Ikon Cyber -->
-                <div class="gd-interactive w-40 h-40 bg-gradient-to-br from-green-500 to-emerald-700 rounded-2xl border-4 border-white flex flex-col items-center justify-center text-5xl shadow-[0_0_40px_rgba(34,197,94,0.5)] cursor-pointer relative" onclick="triggerClickBurst(event)">
-                    💻
-                    <div class="absolute bottom-2 text-[10px] font-mono font-bold tracking-widest text-white/90 bg-slate-950/70 px-2 py-0.5 rounded">ONLINE</div>
-                </div>
+            <!-- Kolom Visualisasi Animasi SOC Lab Isometrik Interaktif -->
+            <div class="flex flex-col items-center justify-center w-full">
+                <div class="w-full max-w-[320px] md:max-w-none bg-slate-950/40 border-2 border-slate-800/60 rounded-2xl p-4 backdrop-blur-sm shadow-2xl relative cursor-pointer gd-interactive" onclick="triggerClickBurst(event)">
+                    <svg viewBox="0 0 500 390" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="shieldFillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#4ade80" stop-opacity="0.85" />
+                                <stop offset="100%" stop-color="#042f1a" stop-opacity="0.95" />
+                            </linearGradient>
+                        </defs>
 
-                <!-- MINI GAME COMPONENT (CYBER INFILTRATION RUNNER) -->
-                <div class="relative w-72 h-16 bg-slate-950/60 border-2 border-slate-800 rounded-xl overflow-hidden flex items-end opacity-90 shadow-inner">
-                    <span class="absolute top-1 left-2 font-mono text-[9px] text-slate-500 tracking-wider uppercase">Cyber Breach Simulation</span>
-                    
-                    <!-- Karakter Cyber Hacker Bergerak -->
-                    <div class="cyber-character text-2xl mb-1 ml-10 z-10 cursor-default select-none filter drop-shadow-[0_0_6px_#22c55e]">🧑‍💻</div>
-                    
-                    <!-- Rintangan Cyber Firewall/Malware Spike -->
-                    <div class="gd-spike-1 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
-                    <div class="gd-spike-2 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
-                    <div class="gd-spike-3 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
-                    
-                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500/50 via-emerald-500 to-green-500/50"></div>
+                        <!-- TAMPILAN RADAR SCANNING RADIAL (Background Radar) -->
+                        <ellipse cx="250" cy="205" rx="140" ry="60" fill="none" stroke="#166534" stroke-width="0.7" opacity="0.2" />
+                        <ellipse cx="250" cy="205" rx="100" ry="43" fill="none" class="radar-pulse-ring" stroke-width="1.2" />
+                        
+                        <!-- HIGH-SPEED DATA PACKET PATHWAY (Jalur Data Mengalir) -->
+                        <g fill="none" stroke-width="2.5">
+                            <path d="M 250 205 L 140 165 L 125 145" class="data-stream-wire" />
+                            <path d="M 250 205 L 350 165 L 370 135" class="data-stream-wire" />
+                            <path d="M 250 205 L 165 250 L 135 270" class="data-stream-wire" />
+                            <path d="M 250 205 L 340 250 L 375 270" class="data-stream-wire" />
+                        </g>
+
+                        <!-- Podium Pusat Sistem -->
+                        <ellipse cx="250" cy="210" rx="55" ry="22" fill="#022c22" stroke="#22c55e" stroke-width="2" />
+                        <ellipse cx="250" cy="210" rx="38" ry="14" fill="none" stroke="#4ade80" stroke-width="1" stroke-dasharray="4,2" />
+
+                        <!-- ENGINE PUSAT: 3D SHIELD MITIGASI ANOMALI (Pulsing Security Core) -->
+                        <g class="anim-shield-node">
+                            <path d="M 218 115 L 218 155 Q 218 188 250 208 Q 282 188 282 155 L 282 115 Z" fill="#052e16" opacity="0.6"/>
+                            <path d="M 222 110 L 222 150 Q 222 182 250 202 Q 278 182 278 150 L 278 110 Z" fill="url(#shieldFillGrad)" stroke="#22c55e" stroke-width="3" />
+                            <!-- Simbol Security Lock Digital -->
+                            <rect x="240" y="145" width="20" height="16" rx="2" fill="none" stroke="#ffffff" stroke-width="2.5" />
+                            <path d="M 244 145 L 244 136 A 6 6 0 0 1 256 136 L 256 145" fill="none" stroke="#ffffff" stroke-width="2.5" />
+                            <circle cx="250" cy="153" r="2" fill="#ffffff" />
+                        </g>
+
+                        <!-- EDGE DEVICE: OPERATIONAL CODE LAPTOP -->
+                        <g class="cyber-node-float" style="animation-delay: 0.3s;">
+                            <path d="M 85 145 L 130 120 L 160 135 L 115 160 Z" fill="#090d16" stroke="#16a34a" stroke-width="1.5" />
+                            <path d="M 130 120 L 135 90 L 165 105 L 160 135 Z" fill="#022c22" stroke="#4ade80" stroke-width="2" />
+                            <!-- Terminal Baris Kode Bergerak -->
+                            <path d="M 140 115 L 158 124 M 140 108 L 154 115 M 140 101 L 158 110" fill="none" stroke-width="2" class="terminal-feed-line" />
+                        </g>
+
+                        <!-- EDGE DEVICE: ENTERPRISE COLD SERVER STACK -->
+                        <g class="cyber-node-float" style="animation-delay: 0.7s;">
+                            <!-- Blok Server Rak Atas -->
+                            <path d="M 350 105 L 380 90 L 410 100 L 380 115 Z" fill="#14532d" stroke="#22c55e" />
+                            <path d="M 350 105 L 350 115 L 380 125 L 380 115 Z" fill="#052e16" stroke="#22c55e" />
+                            <path d="M 380 125 L 410 115 L 410 100 L 380 115 Z" fill="#090d16" stroke="#22c55e" />
+                            <circle cx="359" cy="112" r="2.5" class="led-indicator-1" />
+                            <circle cx="368" cy="115" r="2.5" class="led-indicator-2" />
+                            
+                            <!-- Blok Server Rak Bawah -->
+                            <path d="M 350 135 L 380 120 L 410 130 L 380 145 Z" fill="#14532d" stroke="#22c55e" />
+                            <path d="M 350 135 L 350 145 L 380 155 L 380 145 Z" fill="#052e16" stroke="#22c55e" />
+                            <path d="M 380 155 L 410 145 L 410 130 L 380 145 Z" fill="#090d16" stroke="#22c55e" />
+                            <circle cx="359" cy="142" r="2.5" class="led-indicator-3" />
+                            <circle cx="368" cy="145" r="2.5" class="led-indicator-1" />
+                        </g>
+
+                        <!-- EDGE DEVICE: PACKET SNIFFER WORKSTATION MONITOR -->
+                        <g class="cyber-node-float" style="animation-delay: 1.1s;">
+                            <path d="M 375 282 L 383 286 L 379 294 L 371 290 Z" fill="#15803d" stroke="#22c55e" />
+                            <path d="M 345 250 L 390 225 L 420 245 L 375 270 Z" fill="#022c22" stroke="#4ade80" stroke-width="2" />
+                            <!-- Grafik Oscilloscope Monitor -->
+                            <path d="M 358 253 Q 373 238 388 249 T 410 238" fill="none" stroke-width="2.5" class="terminal-feed-line" />
+                        </g>
+
+                        <!-- EDGE DEVICE: MOBILE FORENSICS TABLET -->
+                        <g class="cyber-node-float" style="animation-delay: 1.5s;">
+                            <path d="M 100 255 L 140 235 L 180 258 L 140 278 Z" fill="#090d16" stroke="#4ade80" stroke-width="2" />
+                            <ellipse cx="140" cy="256" rx="15" ry="7" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="3,1" />
+                            <path d="M 125 258 L 155 248" stroke="#4ade80" stroke-width="2" />
+                        </g>
+                    </svg>
                 </div>
             </div>
 
