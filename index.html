@@ -79,22 +79,29 @@
             border-color: rgba(34, 197, 94, 0.75);
         }
 
-        /* --- MINI GAME SIMULATION INSIDE --- */
-        @keyframes gd-jump {
-            0% { transform: translateY(0) rotate(0deg); }
-            45% { transform: translateY(-30px) rotate(45deg); }
-            55% { transform: translateY(-30px) rotate(45deg); }
-            95% { transform: translateY(0) rotate(90deg); }
-            100% { transform: translateY(0) rotate(90deg); }
+        /* --- CYBER RUNNER SIMULATION INSIDE --- */
+        @keyframes cyber-run-jump {
+            0% { transform: translateY(0) scaleX(1); }
+            10% { transform: translateY(2px) scaleX(1.1) scaleY(0.9); } /* Ancang-ancang melompat */
+            20% { transform: translateY(-28px) scaleX(0.95) scaleY(1.05); } /* Naik */
+            50% { transform: translateY(-34px) rotate(-5deg); } /* Puncak melayang */
+            75% { transform: translateY(-15px) scaleX(1); } /* Turun */
+            88% { transform: translateY(0) scaleX(1.1) scaleY(0.9); } /* Mendarat shock-absorb */
+            100% { transform: translateY(0) scaleX(1); }
         }
+        
         @keyframes obstacles-loop {
             0% { transform: translateX(290px); }
             100% { transform: translateX(-50px); }
         }
-        .gd-cube { animation: gd-jump 0.75s infinite linear; }
-        .gd-spike-1 { animation: obstacles-loop 2s infinite linear; }
-        .gd-spike-2 { animation: obstacles-loop 2s infinite linear; animation-delay: 0.65s; }
-        .gd-spike-3 { animation: obstacles-loop 2s infinite linear; animation-delay: 1.3s; }
+
+        .cyber-character {
+            animation: cyber-run-jump 0.85s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 12px rgba(34, 197, 94, 1);
+        }
+        .gd-spike-1 { animation: obstacles-loop 2.2s infinite linear; }
+        .gd-spike-2 { animation: obstacles-loop 2.2s infinite linear; animation-delay: 0.7s; }
+        .gd-spike-3 { animation: obstacles-loop 2.2s infinite linear; animation-delay: 1.45s; }
     </style>
 </head>
 <body class="gd-main-bg text-slate-100 font-sans min-h-screen relative overflow-x-hidden select-none">
@@ -149,13 +156,18 @@
                     <div class="absolute bottom-2 text-[10px] font-mono font-bold tracking-widest text-white/90 bg-slate-950/70 px-2 py-0.5 rounded">ONLINE</div>
                 </div>
 
-                <!-- MINI GAME COMPONENT -->
+                <!-- MINI GAME COMPONENT (CYBER INFILTRATION RUNNER) -->
                 <div class="relative w-72 h-16 bg-slate-950/60 border-2 border-slate-800 rounded-xl overflow-hidden flex items-end opacity-90 shadow-inner">
-                    <span class="absolute top-1 left-2 font-mono text-[9px] text-slate-500 tracking-wider uppercase">GD Live Simulation</span>
-                    <div class="gd-cube w-5 h-5 bg-green-400 border-2 border-white rounded-sm mb-1 ml-10 shadow-[0_0_10px_rgba(34,197,94,0.8)] z-10"></div>
+                    <span class="absolute top-1 left-2 font-mono text-[9px] text-slate-500 tracking-wider uppercase">Cyber Breach Simulation</span>
+                    
+                    <!-- Karakter Cyber Hacker Bergerak -->
+                    <div class="cyber-character text-2xl mb-1 ml-10 z-10 cursor-default select-none filter drop-shadow-[0_0_6px_#22c55e]">🧑‍💻</div>
+                    
+                    <!-- Rintangan Cyber Firewall/Malware Spike -->
                     <div class="gd-spike-1 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
                     <div class="gd-spike-2 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
                     <div class="gd-spike-3 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
+                    
                     <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500/50 via-emerald-500 to-green-500/50"></div>
                 </div>
             </div>
@@ -199,7 +211,7 @@
             </div>
         </section>
 
-        <!-- LAB DOKUMENTASI VISUAL (BUKTI NYATA NYETTING) -->
+        <!-- LAB DOKUMENTASI VISUAL -->
         <section class="max-w-5xl mx-auto px-4 py-10 w-full">
             <h2 class="text-2xl font-black font-mono mb-8 text-center md:text-left text-white tracking-wider uppercase flex items-center gap-2">
                 <span class="text-green-400">📊</span> LAB DOKUMENTASI & PROJEK AKTIVITAS
