@@ -3,254 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferrel Fortinov Salihamidzic - Portfolio</title>
-    <!-- Menggunakan Tailwind CSS Modern -->
+    <title>Ferrel Fortinov Salihamidzic - SOC Operator Console</title>
+    <!-- Tailwind CSS Engine -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* --- CORE GEOMETRY DASH ARCADE THEME --- */
+        /* --- CORE CYBER SOC OPERATIONS CENTRAL THEME --- */
         
-        /* Animasi Grid Level Editor yang Bergerak Konstan */
-        @keyframes scroll-grid {
+        /* Animasi Latar Belakang Digital Grid */
+        @keyframes cyber-grid-scroll {
             0% { background-position: 0 0; }
-            100% { background-position: 40px 40px; }
+            100% { background-position: 50px 50px; }
         }
 
-        /* Latar Belakang Utama Dinamis */
         .gd-main-bg {
-            background-color: #0b132b;
-            background-size: 40px 40px;
+            background-color: #030712;
+            background-size: 50px 50px;
             background-image: 
-                linear-gradient(to right, rgba(34, 197, 94, 0.08) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(34, 197, 94, 0.08) 1px, transparent 1px);
-            animation: scroll-grid 4s linear infinite;
+                linear-gradient(to right, rgba(34, 197, 94, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(34, 197, 94, 0.05) 1px, transparent 1px);
+            animation: cyber-grid-scroll 6s linear infinite;
             position: relative;
         }
 
-        /* Efek Gelap Gradasi di Ujung Layar */
+        /* Vignette Gelap Mengunci Sudut Pandang Layar Monitor */
         .gd-vignette {
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle, transparent 35%, rgba(2, 6, 23, 0.9) 100%);
+            background: radial-gradient(circle, transparent 30%, rgba(2, 6, 23, 0.95) 100%);
             pointer-events: none;
             z-index: 1;
         }
 
-        /* --- INTERACTION & NEON STYLING --- */
+        /* --- ADVANCED NEON GLOWS & UI EFFECT --- */
+        .gd-neon-text {
+            text-shadow: 0 0 8px rgba(34, 197, 94, 0.7), 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .gd-panel-border {
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            background: rgba(9, 15, 30, 0.85);
+            box-shadow: inset 0 0 12px rgba(34, 197, 94, 0.05);
+            backdrop-filter: blur(12px);
+            transition: all 0.2s ease-in-out;
+        }
         
-        /* Hentakan Menu Khas Tombol Game GD (Snappy & Bounce) */
+        .gd-panel-border:hover {
+            border-color: rgba(34, 197, 94, 0.7);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.25), inset 0 0 15px rgba(34, 197, 94, 0.1);
+        }
+
         .gd-interactive {
-            transition: transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.3);
+            transition: transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.25);
         }
         .gd-interactive:hover {
-            transform: scale(1.04) translateY(-2px);
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.45);
+            transform: scale(1.03) translateY(-2px);
         }
         .gd-interactive:active {
-            transform: scale(0.96);
+            transform: scale(0.97);
         }
 
-        /* Bayangan Teks Neon */
-        .gd-neon-text {
-            text-shadow: 0 0 10px rgba(34, 197, 94, 0.6), 0 0 20px rgba(34, 197, 94, 0.3);
-        }
-
-        /* Efek Partikel Meledak Pas Diklik */
+        /* Klik Efek Partikel Siber Hijau */
         .gd-sparkle {
             position: absolute;
             pointer-events: none;
-            background: #22c55e;
-            border-radius: 2px;
-            box-shadow: 0 0 10px #22c55e, 0 0 20px #10b981;
-            animation: sparkle-burst 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+            background: #4ade80;
+            width: 6px;
+            height: 6px;
+            box-shadow: 0 0 8px #22c55e, 0 0 15px #10b981;
+            animation: cyber-burst 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
         }
 
-        @keyframes sparkle-burst {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
-            100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(270deg); opacity: 0; }
+        @keyframes cyber-burst {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(0); opacity: 0; }
         }
 
-        /* Frame Panel Menu Game */
-        .gd-panel-border {
-            border: 2px solid rgba(34, 197, 94, 0.25);
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(8px);
+        /* --- VECTOR ISOMETRIC INTERACTIVE ANIMATIONS --- */
+        @keyframes pulseShield {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(34,197,94,0.6)); }
+            50% { transform: scale(1.03) translateY(-2px); filter: drop-shadow(0 0 22px rgba(34,197,94,1)); }
         }
-        .gd-panel-border:hover {
-            border-color: rgba(34, 197, 94, 0.75);
+        @keyframes dataRapidFlow {
+            0% { stroke-dashoffset: 32; }
+            100% { stroke-dashoffset: 0; }
         }
-
-        /* --- CYBER RUNNER SIMULATION INSIDE --- */
-        @keyframes cyber-run-jump {
-            0% { transform: translateY(0) scaleX(1); }
-            10% { transform: translateY(2px) scaleX(1.1) scaleY(0.9); }
-            20% { transform: translateY(-28px) scaleX(0.95) scaleY(1.05); }
-            50% { transform: translateY(-34px) rotate(-5deg); }
-            75% { transform: translateY(-15px) scaleX(1); }
-            88% { transform: translateY(0) scaleX(1.1) scaleY(0.9); }
-            100% { transform: translateY(0) scaleX(1); }
+        @keyframes serverLedBlink {
+            0%, 100% { fill: #166534; filter: none; }
+            50% { fill: #22c55e; filter: drop-shadow(0 0 4px #4ade80); }
+        }
+        @keyframes codeTerminalScroll {
+            0% { stroke-dashoffset: 30; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes floatLabNode {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes radarScanRotation {
+            0% { stroke-dashoffset: 0; opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { stroke-dashoffset: 50; opacity: 0.3; }
         }
         
-        @keyframes obstacles-loop {
-            0% { transform: translateX(290px); }
-            100% { transform: translateX(-50px); }
-        }
-
-        .cyber-character {
-            animation: cyber-run-jump 0.85s infinite cubic-bezier(0.4, 0, 0.2, 1);
-            text-shadow: 0 0 12px rgba(34, 197, 94, 1);
-        }
-        .gd-spike-1 { animation: obstacles-loop 2.2s infinite linear; }
-        .gd-spike-2 { animation: obstacles-loop 2.2s infinite linear; animation-delay: 0.7s; }
-        .gd-spike-3 { animation: obstacles-loop 2.2s infinite linear; animation-delay: 1.45s; }
+        .anim-shield-node { animation: pulseShield 2.5s infinite ease-in-out; transform-origin: center; }
+        .data-stream-wire { stroke: #22c55e; stroke-dasharray: 8, 4; animation: dataRapidFlow 1s linear infinite; }
+        .led-indicator-1 { animation: serverLedBlink 0.7s infinite steps(2); }
+        .led-indicator-2 { animation: serverLedBlink 1.1s infinite steps(2); animation-delay: 0.2s; }
+        .led-indicator-3 { animation: serverLedBlink 0.5s infinite steps(2); animation-delay: 0.3s; }
+        .terminal-feed-line { stroke: #4ade80; stroke-dasharray: 5, 2; animation: codeTerminalScroll 1.5s linear infinite; }
+        .cyber-node-float { animation: floatLabNode 4s infinite ease-in-out; }
+        .radar-pulse-ring { stroke: #22c55e; stroke-dasharray: 10, 5; animation: radarScanRotation 3s linear infinite; }
     </style>
 </head>
-<body class="gd-main-bg text-slate-100 font-sans min-h-screen relative overflow-x-hidden select-none">
+<body class="gd-main-bg text-slate-200 font-sans min-h-screen relative overflow-x-hidden select-none">
 
-    <!-- Efek Bayangan Gelap Latar Belakang -->
+    <!-- Efek Lapisan Kaca Monitor Ruang SOC -->
     <div class="gd-vignette"></div>
 
-    <!-- Konten Utama di Atas Background -->
     <div class="relative z-10 min-h-screen flex flex-col justify-between">
 
-        <!-- NAVIGATION BAR -->
-        <nav class="bg-slate-950/70 backdrop-blur-md sticky top-0 z-50 border-b-2 border-green-500/30 px-4">
-            <div class="max-w-6xl mx-auto py-4 flex justify-between items-center">
-                <a href="index.html" class="text-xl font-black tracking-wider text-green-400 font-mono gd-interactive gd-neon-text">&lt;FERREL.FS /&gt;</a>
-                <div class="flex space-x-2 md:space-x-4 font-bold text-xs md:text-sm">
-                    <a href="index.html" class="bg-green-500 text-slate-950 px-4 py-2 rounded-md shadow-[0_4px_0_#15803d] transition active:translate-y-1 active:shadow-none">Dashboard</a>
-                    <a href="background.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-md shadow-[0_4px_0_#334155] gd-interactive inline-block">My Background</a>
-                    <a href="certificates.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-md shadow-[0_4px_0_#334155] gd-interactive inline-block">Certificates</a>
+        <!-- CONSOLE COMMAND NAVIGATION HEADER -->
+        <nav class="bg-slate-950/80 backdrop-blur-lg sticky top-0 z-50 border-b border-green-500/20 px-4">
+            <div class="max-w-6xl mx-auto py-3.5 flex justify-between items-center">
+                <a href="index.html" class="text-lg font-mono font-black tracking-wider text-green-400 gd-neon-text flex items-center gap-2">
+                    <span class="inline-block w-2.5 h-2.5 bg-green-500 rounded-full animate-ping"></span>
+                    SYS_OPERATOR: FERREL.FS
+                </a>
+                <div class="flex space-x-2 font-mono text-xs font-bold">
+                    <a href="index.html" class="bg-green-500 text-slate-950 px-3.5 py-1.5 rounded border border-green-400 shadow-[0_0_10px_rgba(34,197,94,0.3)] transition active:scale-95">Dashboard.exe</a>
+                    <a href="background.html" class="bg-slate-900 border border-slate-800 hover:border-green-500/50 text-slate-400 hover:text-green-400 px-3.5 py-1.5 rounded gd-interactive">Profile.dat</a>
+                    <a href="certificates.html" class="bg-slate-900 border border-slate-800 hover:border-green-500/50 text-slate-400 hover:text-green-400 px-3.5 py-1.5 rounded gd-interactive">Credentials.key</a>
                 </div>
             </div>
         </nav>
 
-        <!-- HERO DASHBOARD SECTION -->
-        <header class="max-w-5xl mx-auto px-4 py-16 md:py-24 w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <!-- SOC MAIN OPERATIONS HEADER -->
+        <header class="max-w-6xl mx-auto px-4 py-12 md:py-20 w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             
-            <!-- Kolom Informasi Diri -->
-            <div class="md:col-span-2 text-center md:text-left">
-                <div class="inline-block bg-green-950/70 border border-green-500/40 rounded-full px-4 py-1 text-green-400 font-mono text-xs uppercase tracking-widest mb-4 animate-pulse">
-                    🚀 READY TO LAUNCH // LEVEL: SOC ANALYST
+            <!-- Terminal Deskripsi Operator -->
+            <div class="md:col-span-7 text-left">
+                <div class="inline-flex items-center gap-2 bg-green-950/40 border border-green-500/30 rounded px-3 py-1 font-mono text-[11px] text-green-400 uppercase tracking-wider mb-5">
+                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                    Status: Threat Defense Engaged // Tier 1 SOC Analyst
                 </div>
-                <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-6 uppercase text-white">
-                    HI, I'M <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-green-500 gd-neon-text">FERREL FORTINOV</span>
+                <h1 class="text-3xl md:text-5xl font-mono font-black text-white uppercase tracking-tight mb-5">
+                    SEC_CORE: <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500 gd-neon-text">FERREL F. SALIHAMIDZIC</span>
                 </h1>
-                <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8 bg-slate-950/70 p-5 rounded-xl border border-slate-800/80 backdrop-blur-sm shadow-xl">
-                    Lulusan Teknik Jaringan Komputer dan Telekomunikasi (TJKT) dari SMK Wikrama Bogor dengan fokus utama pada penguatan infrastruktur IT Support dan analisis pertahanan siber. Siap mengoptimalkan pemantauan sistem, mitigasi insiden jaringan, serta bertindak responsif sebagai Junior SOC Analyst profesional.
-                </p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <button onclick="toggleModal(); triggerClickBurst(event)" class="gd-interactive bg-green-400 hover:bg-green-300 text-slate-950 font-black px-8 py-4 rounded-xl text-lg tracking-wide uppercase shadow-[0_6px_0_#16a34a] cursor-pointer relative overflow-hidden">
-                        ✉️ Hubungi Saya
+                <div class="font-mono text-sm text-slate-400 space-y-4 bg-slate-950/70 p-6 rounded-lg border border-slate-800 backdrop-blur-md shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-green-500/40 to-transparent"></div>
+                    <p class="leading-relaxed">
+                        &gt; Mengintegrasikan fondasi akademik Teknik Jaringan Komputer dan Telekomunikasi (TJKT) SMK Wikrama Bogor untuk mengamankan perimeter digital perusahaan.
+                    </p>
+                    <p class="leading-relaxed">
+                        &gt; Berpengalaman dalam akselerasi operasional IT Support, pemantauan anomali lalu lintas jaringan, pengelolaan log audit SIEM, dan kesiapan mitigasi insiden siber secara proaktif.
+                    </p>
+                </div>
+                
+                <!-- Action Controls -->
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <button onclick="toggleModal(); triggerCyberClick(event)" class="gd-interactive font-mono font-bold text-xs bg-green-500 hover:bg-green-400 text-slate-950 px-6 py-3.5 rounded shadow-[0_0_15px_rgba(34,197,94,0.4)] tracking-widest uppercase cursor-pointer">
+                        [ Establish_Connection ]
                     </button>
-                    <a href="background.html" onclick="triggerClickBurst(event)" class="gd-interactive bg-slate-800/90 border-2 border-slate-700 hover:border-green-400 text-green-400 font-bold px-8 py-4 rounded-xl text-lg tracking-wide uppercase shadow-[0_6px_0_#1e293b] inline-block relative">
-                        🕹️ Lihat Background
+                    <a href="background.html" onclick="triggerCyberClick(event)" class="gd-interactive font-mono font-bold text-xs bg-slate-900 border border-slate-700 hover:border-green-400 text-green-400 px-6 py-3.5 rounded tracking-widest uppercase inline-block">
+                        [ Read_Logs ]
                     </a>
                 </div>
             </div>
 
-            <!-- Kolom Mini Game GD Stage & Box Animasi -->
-            <div class="flex flex-col items-center justify-center gap-6">
-                <!-- Box Utama Ikon Cyber -->
-                <div class="gd-interactive w-40 h-40 bg-gradient-to-br from-green-500 to-emerald-700 rounded-2xl border-4 border-white flex flex-col items-center justify-center text-5xl shadow-[0_0_40px_rgba(34,197,94,0.5)] cursor-pointer relative" onclick="triggerClickBurst(event)">
-                    💻
-                    <div class="absolute bottom-2 text-[10px] font-mono font-bold tracking-widest text-white/90 bg-slate-950/70 px-2 py-0.5 rounded">ONLINE</div>
-                </div>
+            <!-- Pusat Visualisasi Isometrik Siber - Kecepatan Tinggi (SOC Console Map) -->
+            <div class="md:col-span-5 flex flex-col items-center justify-center w-full">
+                <div class="w-full max-w-[370px] bg-slate-950/80 p-5 rounded-xl border border-green-500/30 relative shadow-[0_0_30px_rgba(3,7,18,0.9)]">
+                    
+                    <!-- Dekorasi Garis Target Crosshair Khas UI Militer/Siber -->
+                    <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-green-500/40"></div>
+                    <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-green-500/40"></div>
+                    <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-green-500/40"></div>
+                    <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-green-500/40"></div>
+                    
+                    <span class="font-mono text-[9px] text-green-400/50 block tracking-widest uppercase mb-1">// SECURITY ARCHITECTURE LIVE GRAPH</span>
+                    
+                    <!-- HIGH-TECH INLINE ISO SVG CYBER LAB -->
+                    <svg viewBox="0 0 500 390" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="shieldFillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#4ade80" stop-opacity="0.85" />
+                                <stop offset="100%" stop-color="#042f1a" stop-opacity="0.95" />
+                            </linearGradient>
+                        </defs>
 
-                <!-- MINI GAME COMPONENT (CYBER INFILTRATION RUNNER) -->
-                <div class="relative w-72 h-16 bg-slate-950/60 border-2 border-slate-800 rounded-xl overflow-hidden flex items-end opacity-90 shadow-inner">
-                    <span class="absolute top-1 left-2 font-mono text-[9px] text-slate-500 tracking-wider uppercase">Cyber Breach Simulation</span>
-                    
-                    <!-- Karakter Cyber Hacker Bergerak -->
-                    <div class="cyber-character text-2xl mb-1 ml-10 z-10 cursor-default select-none filter drop-shadow-[0_0_6px_#22c55e]">🧑‍💻</div>
-                    
-                    <!-- Rintangan Cyber Firewall/Malware Spike -->
-                    <div class="gd-spike-1 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
-                    <div class="gd-spike-2 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
-                    <div class="gd-spike-3 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
-                    
-                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500/50 via-emerald-500 to-green-500/50"></div>
+                        <!-- TAMPILAN RADAR SCANNING RADIAL (Background Radar) -->
+                        <ellipse cx="250" cy="205" rx="140" ry="60" fill="none" stroke="#166534" stroke-width="0.7" opacity="0.2" />
+                        <ellipse cx="250" cy="205" rx="100" ry="43" fill="none" class="radar-pulse-ring" stroke-width="1.2" />
+                        
+                        <!-- HIGH-SPEED DATA PACKET PATHWAY -->
+                        <g fill="none" stroke-width="2.5">
+                            <path d="M 250 205 L 140 165 L 125 145" class="data-stream-wire" />
+                            <path d="M 250 205 L 350 165 L 370 135" class="data-stream-wire" />
+                            <path d="M 250 205 L 165 250 L 135 270" class="data-stream-wire" />
+                            <path d="M 250 205 L 340 250 L 375 270" class="data-stream-wire" />
+                        </g>
+
+                        <!-- Podium Pusat Sistem -->
+                        <ellipse cx="250" cy="210" rx="55" ry="22" fill="#022c22" stroke="#22c55e" stroke-width="2" />
+                        <ellipse cx="250" cy="210" rx="38" ry="14" fill="none" stroke="#4ade80" stroke-width="1" stroke-dasharray="4,2" />
+
+                        <!-- ENGINE PUSAT: 3D SHIELD MITIGASI ANOMALI (Pulsing Security Core) -->
+                        <g class="anim-shield-node">
+                            <path d="M 218 115 L 218 155 Q 218 188 250 208 Q 282 188 282 155 L 282 115 Z" fill="#052e16" opacity="0.6"/>
+                            <path d="M 222 110 L 222 150 Q 222 182 250 202 Q 278 182 278 150 L 278 110 Z" fill="url(#shieldFillGrad)" stroke="#22c55e" stroke-width="3" />
+                            <!-- Simbol Security Lock Digital -->
+                            <rect x="240" y="145" width="20" height="16" rx="2" fill="none" stroke="#ffffff" stroke-width="2.5" />
+                            <path d="M 244 145 L 244 136 A 6 6 0 0 1 256 136 L 256 145" fill="none" stroke="#ffffff" stroke-width="2.5" />
+                            <circle cx="250" cy="153" r="2" fill="#ffffff" />
+                        </g>
+
+                        <!-- EDGE DEVICE: OPERATIONAL CODE LAPTOP -->
+                        <g class="cyber-node-float" style="animation-delay: 0.3s;">
+                            <path d="M 85 145 L 130 120 L 160 135 L 115 160 Z" fill="#090d16" stroke="#16a34a" stroke-width="1.5" />
+                            <path d="M 130 120 L 135 90 L 165 105 L 160 135 Z" fill="#022c22" stroke="#4ade80" stroke-width="2" />
+                            <!-- Terminal Baris Kode Bergerak -->
+                            <path d="M 140 115 L 158 124 M 140 108 L 154 115 M 140 101 L 158 110" fill="none" stroke-width="2" class="terminal-feed-line" />
+                        </g>
+
+                        <!-- EDGE DEVICE: ENTERPRISE COLD SERVER STACK -->
+                        <g class="cyber-node-float" style="animation-delay: 0.7s;">
+                            <!-- Blok Server Rak Atas -->
+                            <path d="M 350 105 L 380 90 L 410 100 L 380 115 Z" fill="#14532d" stroke="#22c55e" />
+                            <path d="M 350 105 L 350 115 L 380 125 L 380 115 Z" fill="#052e16" stroke="#22c55e" />
+                            <path d="M 380 125 L 410 115 L 410 100 L 380 115 Z" fill="#090d16" stroke="#22c55e" />
+                            <circle cx="359" cy="112" r="2.5" class="led-indicator-1" />
+                            <circle cx="368" cy="115" r="2.5" class="led-indicator-2" />
+                            
+                            <!-- Blok Server Rak Bawah -->
+                            <path d="M 350 135 L 380 120 L 410 130 L 380 145 Z" fill="#14532d" stroke="#22c55e" />
+                            <path d="M 350 135 L 350 145 L 380 155 L 380 145 Z" fill="#052e16" stroke="#22c55e" />
+                            <path d="M 380 155 L 410 145 L 410 130 L 380 145 Z" fill="#090d16" stroke="#22c55e" />
+                            <circle cx="359" cy="142" r="2.5" class="led-indicator-3" />
+                            <circle cx="368" cy="145" r="2.5" class="led-indicator-1" />
+                        </g>
+
+                        <!-- EDGE DEVICE: PACKET SNIFFER WORKSTATION MONITOR -->
+                        <g class="cyber-node-float" style="animation-delay: 1.1s;">
+                            <path d="M 375 282 L 383 286 L 379 294 L 371 290 Z" fill="#15803d" stroke="#22c55e" />
+                            <path d="M 345 250 L 390 225 L 420 245 L 375 270 Z" fill="#022c22" stroke="#4ade80" stroke-width="2" />
+                            <!-- Grafik Oscilloscope Monitor -->
+                            <path d="M 358 253 Q 373 238 388 249 T 410 238" fill="none" stroke-width="2.5" class="terminal-feed-line" />
+                        </g>
+
+                        <!-- EDGE DEVICE: MOBILE FORENSICS TABLET -->
+                        <g class="cyber-node-float" style="animation-delay: 1.5s;">
+                            <path d="M 100 255 L 140 235 L 180 258 L 140 278 Z" fill="#090d16" stroke="#4ade80" stroke-width="2" />
+                            <ellipse cx="140" cy="256" rx="15" ry="7" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="3,1" />
+                            <path d="M 125 258 L 155 248" stroke="#4ade80" stroke-width="2" />
+                        </g>
+                    </svg>
                 </div>
             </div>
 
         </header>
 
-        <!-- TECHNICAL SKILLS SECTION (GAME STAGE TILES) -->
-        <section class="max-w-5xl mx-auto px-4 py-10 w-full">
-            <h2 class="text-2xl font-black font-mono mb-8 text-center md:text-left text-white tracking-wider uppercase flex items-center gap-2">
-                <span class="text-green-400">⚡</span> CORE COMPETENCIES & EXPERTISE
+        <!-- SOC HARDWARE & COMMAND CAPABILITIES (Grid Menu Modul) -->
+        <section class="max-w-6xl mx-auto px-4 py-8 w-full">
+            <h2 class="text-xl font-mono font-black mb-6 text-left text-white tracking-widest uppercase flex items-center gap-2">
+                <span class="w-2.5 h-2.5 bg-green-500 rounded-sm"></span>
+                [ MODULE_CONTROL: CAPABILITIES_MATRIX ]
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="text-2xl">🛡️</span>
-                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">Security Operations</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">Implementasi arsitektur SIEM (Wazuh, Stellar Cyber), manajemen Log Analysis, Alert Triage, serta investigasi insiden keamanan jaringan.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="gd-panel-border gd-interactive p-5 rounded">
+                    <div class="font-mono text-green-400 font-bold text-sm uppercase mb-1.5">// 01 / SEC_OPS</div>
+                    <h3 class="text-white font-mono text-base font-black uppercase mb-2">Security Monitoring</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed font-mono">Manajemen event SIEM (Wazuh/Stellar Cyber), analisis log real-time, triage peringatan, serta investigasi awal ancaman malware.</p>
                 </div>
-                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="text-2xl">🌐</span>
-                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">Network Security Tools</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">Konfigurasi perangkat keamanan komersial Fortinet, monitoring paket via Wireshark, serta manajemen routing/VLAN lanjut menggunakan RouterOS MikroTik.</p>
+                <div class="gd-panel-border gd-interactive p-5 rounded">
+                    <div class="font-mono text-green-400 font-bold text-sm uppercase mb-1.5">// 02 / NET_DEF</div>
+                    <h3 class="text-white font-mono text-base font-black uppercase mb-2">Network Hardening</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed font-mono">Pengalaman konfigurasi Fortinet Firewall, analisis sniffing paket via Wireshark, dan manajemen segmen inter-VLAN MikroTik RouterOS.</p>
                 </div>
-                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="text-2xl">🐧</span>
-                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">OS & Virtualization</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">Administrasi server berbasis Linux (Ubuntu/Debian Server) & Windows Server. Pengalaman orkestrasi virtualisasi Proxmox VE, VMware ESXi, dan kontainerisasi Docker.</p>
+                <div class="gd-panel-border gd-interactive p-5 rounded">
+                    <div class="font-mono text-green-400 font-bold text-sm uppercase mb-1.5">// 03 / SYS_ADMIN</div>
+                    <h3 class="text-white font-mono text-base font-black uppercase mb-2">Virtualization Lab</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed font-mono">Administrasi server bare-metal Proxmox VE, VMware ESXi, pengelolaan server internal Ubuntu/Debian, serta arsitektur kontainer Docker.</p>
                 </div>
-                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="text-2xl">☁️</span>
-                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">Cloud & Infrastructure</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">Dasar-dasar tata kelola arsitektur Cloud (AWS & Google Cloud Platform) serta manajemen klaster basis data relasional seperti PostgreSQL dan MySQL.</p>
+                <div class="gd-panel-border gd-interactive p-5 rounded">
+                    <div class="font-mono text-green-400 font-bold text-sm uppercase mb-1.5">// 04 / DATA_CORE</div>
+                    <h3 class="text-white font-mono text-base font-black uppercase mb-2">Infrastructure</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed font-mono">Dasar-dasar integrasi komputasi awan AWS & GCP, pengelolaan replikasi database PostgreSQL/MySQL, serta otomasi backup cronjobs.</p>
                 </div>
             </div>
         </section>
 
-        
-
-        <!-- POP-UP KONTAK MODAL -->
-        <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
-            <div class="bg-slate-900 border-4 border-green-500 w-full max-w-md rounded-2xl p-6 shadow-[0_0_50px_rgba(34,197,94,0.4)] relative">
-                <button onclick="toggleModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-black text-2xl cursor-pointer transition">&times;</button>
+        <!-- CONSOLE DIRECT TRANSMITTER (Popup Terminal Kontak) -->
+        <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/90 backdrop-blur-md p-4">
+            <div class="bg-slate-900 border-2 border-green-500 w-full max-w-md rounded p-6 shadow-[0_0_40px_rgba(34,197,94,0.3)] relative">
+                <button onclick="toggleModal()" class="absolute top-3 right-4 text-slate-500 hover:text-green-400 font-mono text-xl cursor-pointer transition">[X]</button>
+                <h3 class="text-xl font-mono font-black text-green-400 mb-1 uppercase tracking-wider">✉️ SEND_LOG_PAYLOAD</h3>
+                <p class="text-slate-500 text-[10px] font-mono mb-4 uppercase tracking-widest">// Jalur enkripsi langsung ke ferrelfortinovs@gmail.com</p>
                 
-                <h3 class="text-2xl font-black font-mono text-green-400 mb-2 uppercase tracking-wide">✉️ TRANSMIT MESSAGE</h3>
-                <p class="text-slate-400 text-xs mb-4 uppercase tracking-wider">// Jalur koneksi langsung menuju kotak masuk Ferrel.</p>
-                
-                <form action="https://formsubmit.co/ferrelfortinovs@gmail.com" method="POST" class="space-y-4">
+                <form action="https://formsubmit.co/ferrelfortinovs@gmail.com" method="POST" class="space-y-4 font-mono text-xs">
                     <input type="hidden" name="_to" value="ferrelfortinovs@gmail.com">
                     <input type="hidden" name="_captcha" value="false">
-                    
                     <div>
-                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase mb-1" for="email">Sender Email</label>
-                        <input type="email" name="email" id="email" required placeholder="nama@perusahaan.com" 
-                               class="w-full bg-slate-950 border-2 border-slate-700 focus:border-green-400 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none transition font-mono">
+                        <label class="block font-bold text-slate-300 uppercase mb-1" for="email">Origin_Source (Email Anda)</label>
+                        <input type="email" name="email" id="email" required placeholder="name@company.xyz" 
+                               class="w-full bg-slate-950 border border-slate-700 focus:border-green-500 rounded px-3 py-2.5 text-slate-200 focus:outline-none transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase mb-1" for="message">Payload Data (Pesan)</label>
-                        <textarea name="message" id="message" rows="4" required placeholder="Tulis penawaran kerja atau pesan Anda di sini..." 
-                                  class="w-full bg-slate-950 border-2 border-slate-700 focus:border-green-400 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none transition resize-none"></textarea>
+                        <label class="block font-bold text-slate-300 uppercase mb-1" for="message">Data_Payload (Isi Pesan)</label>
+                        <textarea name="message" id="message" rows="4" required placeholder="Tulis penawaran kolaborasi atau pesan log di sini..." 
+                                  class="w-full bg-slate-950 border border-slate-700 focus:border-green-500 rounded px-3 py-2.5 text-slate-200 focus:outline-none transition resize-none"></textarea>
                     </div>
-                    
-                    <button type="submit" class="w-full bg-green-400 hover:bg-green-300 text-slate-950 font-black py-3 rounded-lg text-sm uppercase tracking-widest shadow-[0_4px_0_#16a34a] active:translate-y-1 active:shadow-none transition cursor-pointer">
-                        LAUNCH MESSAGE
+                    <button type="submit" class="w-full bg-green-500 hover:bg-green-400 text-slate-950 font-black py-3 rounded tracking-widest uppercase transition shadow-[0_0_10px_rgba(34,197,94,0.2)] cursor-pointer">
+                        EXECUTE_TRANSMISSION
                     </button>
                 </form>
             </div>
         </div>
 
-        <!-- FOOTER -->
-        <footer class="bg-slate-950/80 text-slate-500 text-center py-6 text-xs border-t-2 border-slate-900 font-mono tracking-widest uppercase mt-12">
-            <p>© 2026 FERREL FORTINOV SALIHAMIDZIC. DRIVEN BY CYBERSECURITY & ARCADE THEMES.</p>
+        <!-- CONSOLE TERMINAL FOOTER -->
+        <footer class="bg-slate-950 text-slate-600 text-center py-5 text-[10px] font-mono border-t border-slate-900 tracking-widest uppercase mt-8">
+            <p>SEC_CONSOLE VERSION 2.6.0 // TERMINAL SECURE STATUS: OPERATIONAL</p>
         </footer>
 
     </div>
 
-    <!-- JAVASCRIPT FOR PARTICLE EFFECT & MODAL -->
+    <!-- SCRIPT LOGIC FOR REAL-TIME INTERACTION -->
     <script>
         function toggleModal() {
             const modal = document.getElementById('contactModal');
@@ -263,36 +339,32 @@
             }
         }
 
-        /* LEDAKAN KOTAK HIJAU PAS DIKLIK */
-        function triggerClickBurst(e) {
-            const container = document.body;
-            
-            for (let i = 0; i < 16; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('gd-sparkle');
+        // Efek Letupan Digital Hijau Saat Elemen Diklik
+        function triggerCyberClick(e) {
+            const area = document.body;
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('gd-sparkle');
+                particle.style.left = `${e.clientX + window.scrollX}px`;
+                particle.style.top = `${e.clientY + window.scrollY}px`;
                 
-                const dimension = Math.random() * 8 + 4;
-                sparkle.style.width = `${dimension}px`;
-                sparkle.style.height = `${dimension}px`;
+                const angle = Math.random() * Math.PI * 2;
+                const force = Math.random() * 70 + 40;
+                const mx = Math.cos(angle) * force;
+                const my = Math.sin(angle) * force;
                 
-                sparkle.style.left = `${e.clientX + window.scrollX}px`;
-                sparkle.style.top = `${e.clientY + window.scrollY}px`;
+                particle.style.setProperty('--mx', `${mx}px`);
+                particle.style.setProperty('--my', `${my}px`);
                 
-                const angularDirection = Math.random() * Math.PI * 2;
-                const distanceForce = Math.random() * 90 + 50;
-                const mx = Math.cos(angularDirection) * distanceForce;
-                const my = Math.sin(angularDirection) * distanceForce;
-                
-                sparkle.style.setProperty('--mx', `${mx}px`);
-                sparkle.style.setProperty('--my', `${my}px`);
-                
-                container.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    sparkle.remove();
-                }, 550);
+                area.appendChild(particle);
+                setTimeout(() => { particle.remove(); }, 500);
             }
         }
+        
+        // Melampirkan efek klik global ke seluruh elemen interaktif siber
+        document.querySelectorAll('.gd-interactive, button, a').forEach(elem => {
+            elem.addEventListener('click', triggerCyberClick);
+        });
     </script>
 </body>
 </html>
