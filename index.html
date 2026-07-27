@@ -4,178 +4,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferrel Fortinov - Portfolio</title>
-    <!-- Menggunakan Tailwind CSS untuk desain modern -->
+    <!-- Menggunakan Tailwind CSS untuk utilitas modern -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        .cyber-glow:hover {
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+        /* --- CORE GEOMETRY DASH ARCADE THEME --- */
+        
+        /* Animasi Grid Level Editor yang Bergerak Konstan */
+        @keyframes scroll-grid {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
         }
 
-        /* --- GEOMETRY DASH RENEWED ANIMATION --- */
+        /* Latar Belakang Utama Dinamis */
+        .gd-main-bg {
+            background-color: #0b132b;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(34, 197, 94, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(34, 197, 94, 0.08) 1px, transparent 1px);
+            animation: scroll-grid 4s linear infinite;
+            position: relative;
+        }
+
+        /* Efek Gelap Gradasi di Ujung Layar */
+        .gd-vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 35%, rgba(2, 6, 23, 0.9) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* --- INTERACTION & NEON STYLING --- */
+        
+        /* Hentakan Menu Khas Tombol Game GD (Snappy & Bounce) */
+        .gd-interactive {
+            transition: transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.3);
+        }
+        .gd-interactive:hover {
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.45);
+        }
+        .gd-interactive:active {
+            transform: scale(0.96);
+        }
+
+        /* Bayangan Teks Neon */
+        .gd-neon-text {
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.6), 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Efek Partikel Meledak Pas Diklik */
+        .gd-sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: #22c55e;
+            border-radius: 2px;
+            box-shadow: 0 0 10px #22c55e, 0 0 20px #10b981;
+            animation: sparkle-burst 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes sparkle-burst {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(270deg); opacity: 0; }
+        }
+
+        /* Frame Panel Menu Game */
+        .gd-panel-border {
+            border: 2px solid rgba(34, 197, 94, 0.25);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+        }
+        .gd-panel-border:hover {
+            border-color: rgba(34, 197, 94, 0.75);
+        }
+
+        /* --- MINI GAME SIMULATION INSIDE --- */
         @keyframes gd-jump {
             0% { transform: translateY(0) rotate(0deg); }
-            45% { transform: translateY(-32px) rotate(45deg); }
-            55% { transform: translateY(-32px) rotate(45deg); }
+            45% { transform: translateY(-30px) rotate(45deg); }
+            55% { transform: translateY(-30px) rotate(45deg); }
             95% { transform: translateY(0) rotate(90deg); }
             100% { transform: translateY(0) rotate(90deg); }
         }
-
         @keyframes obstacles-loop {
-            0% { transform: translateX(280px); }
-            100% { transform: translateX(-60px); }
+            0% { transform: translateX(290px); }
+            100% { transform: translateX(-50px); }
         }
-
-        .gd-cube {
-            animation: gd-jump 0.75s infinite linear;
-        }
-
-        /* Animasi duri dengan jeda waktu agar jalannya gantian */
-        .gd-spike-1 {
-            animation: obstacles-loop 2s infinite linear;
-        }
-        .gd-spike-2 {
-            animation: obstacles-loop 2s infinite linear;
-            animation-delay: 0.65s;
-        }
-        .gd-spike-3 {
-            animation: obstacles-loop 2s infinite linear;
-            animation-delay: 1.3s;
-        }
-
-        /* Efek latar belakang kotak-kotak game */
-        .gd-bg-grid {
-            background-size: 20px 20px;
-            background-image: linear-gradient(to right, rgba(51, 65, 85, 0.15) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(51, 65, 85, 0.15) 1px, transparent 1px);
-        }
+        .gd-cube { animation: gd-jump 0.75s infinite linear; }
+        .gd-spike-1 { animation: obstacles-loop 2s infinite linear; }
+        .gd-spike-2 { animation: obstacles-loop 2s infinite linear; animation-delay: 0.65s; }
+        .gd-spike-3 { animation: obstacles-loop 2s infinite linear; animation-delay: 1.3s; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans">
+<body class="gd-main-bg text-slate-100 font-sans min-h-screen relative overflow-x-hidden select-none">
 
-    <!-- NAVIGATION BAR -->
-    <nav class="bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-xl font-bold tracking-wider text-green-400 font-mono">&lt;FERREL.FS /&gt;</a>
-            <div class="space-x-6 font-medium text-sm">
-                <a href="index.html" class="text-green-400 border-b-2 border-green-400 pb-1">Dashboard</a>
-                <a href="background.html" class="text-slate-400 hover:text-green-400 transition">My Background</a>
-                <a href="certificates.html" class="text-slate-400 hover:text-green-400 transition">Certificates</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Efek Bayangan Gelap Latar Belakang -->
+    <div class="gd-vignette"></div>
 
-    <!-- HERO SECTION (DASHBOARD) -->
-    <header class="max-w-4xl mx-auto px-4 py-20 text-center md:text-left md:flex md:items-center md:justify-between">
-        <div class="md:w-2/3">
-            <p class="text-green-400 font-mono tracking-widest text-sm uppercase mb-2">// Cybersecurity & Network Enthusiast</p>
-            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-                Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">Ferrel Fortinov Salihamidzic</span>
-            </h1>
-            <p class="text-slate-400 text-lg leading-relaxed mb-6">
-                Lulusan Teknik Jaringan Komputer dan Telekomunikasi (TJKT) dari SMK Wikrama Bogor yang berfokus pada infrastruktur IT Support dan dasar-dasar keamanan siber. Siap mengintegrasikan keahlian analisis jaringan dan pemantauan sistem secara profesional guna berkontribusi sebagai Junior SOC Analyst atau peran operasional keamanan IT di dalam perusahaan.
-            </p>
-            <div class="flex justify-center md:justify-start gap-4">
-                <!-- Tombol Hubungi Saya Sekarang Memicu Modal Pop-up -->
-                <button onclick="toggleModal()" class="bg-green-500 hover:bg-green-600 text-slate-950 font-bold px-6 py-3 rounded-lg shadow-lg transition duration-200 cursor-pointer">Hubungi Saya</button>
-                <a href="background.html" class="border border-slate-700 hover:border-green-400 text-slate-300 hover:text-green-400 font-medium px-6 py-3 rounded-lg transition duration-200">Lihat Background</a>
-            </div>
+    <!-- Konten Utama di Atas Background -->
+    <div class="relative z-10 min-h-screen flex flex-col justify-between">
 
-            <!-- MINI GAME STAGE GEOMETRY DASH -->
-            <div class="relative w-72 h-20 bg-slate-950/40 border border-slate-800 rounded-xl overflow-hidden mt-8 mx-auto md:mx-0 flex items-end opacity-90 gd-bg-grid shadow-inner">
-                
-                <!-- Label Info Pojok Kiri Atas -->
-                <span class="absolute top-1 left-2 font-mono text-[10px] text-slate-500 tracking-widest uppercase">GD Level: SOC Analyst</span>
-                
-                <!-- Karakter Kubus Hijau -->
-                <div class="gd-cube w-6 h-6 bg-green-400 border-2 border-white rounded-sm mb-1 ml-12 shadow-[0_0_12px_rgba(34,197,94,0.85)] z-10"></div>
-                
-                <!-- Jalur Rintangan Duri Beruntun -->
-                <div class="gd-spike-1 absolute bottom-1 right-0 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[13px] border-b-rose-500"></div>
-                <div class="gd-spike-2 absolute bottom-1 right-0 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[13px] border-b-rose-500"></div>
-                <div class="gd-spike-3 absolute bottom-1 right-0 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[13px] border-b-rose-500"></div>
-                
-                <!-- Garis Tanah Tebal -->
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500/50 via-emerald-500 to-green-500/50"></div>
-            </div>
-        </div>
-        <div class="mt-10 md:mt-0 md:w-1/3 flex justify-center">
-            <!-- Representasi visual/ikon siber -->
-            <div class="w-48 h-48 bg-gradient-to-tr from-green-500 to-emerald-800 rounded-full flex items-center justify-center text-5xl opacity-80 shadow-2xl animate-pulse">
-                💻
-            </div>
-        </div>
-    </header>
-
-    <!-- MODAL POP-UP FORMULIR KONTAK -->
-    <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4">
-        <div class="bg-slate-950 border border-slate-800 w-full max-w-md rounded-xl p-6 shadow-2xl relative">
-            <!-- Tombol Close (X) -->
-            <button onclick="toggleModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-100 font-bold text-lg cursor-pointer">&times;</button>
-            
-            <h3 class="text-xl font-bold font-mono text-green-400 mb-2">✉️ Kirim Pesan</h3>
-            <p class="text-slate-400 text-xs mb-4">Pesan Anda akan langsung masuk ke email Ferrel.</p>
-            
-            <!-- FORM ACTION (Menggunakan FormSubmit) -->
-            <form action="https://formsubmit.co/ferrelfortinovs@gmail.com" method="POST" class="space-y-4">
-                
-                <!-- Konfigurasi FormSubmit -->
-                <input type="hidden" name="_to" value="ferrelfortinovs@gmail.com">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://zico1411.github.io/zico-s-portfolio/index.html">
-                
-                <div>
-                    <label class="block text-xs font-mono text-slate-300 mb-1" for="email">Email Anda</label>
-                    <input type="email" name="email" id="email" required placeholder="nama@email.com" 
-                           class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-green-400">
+        <!-- NAVIGATION BAR -->
+        <nav class="bg-slate-950/70 backdrop-blur-md sticky top-0 z-50 border-b-2 border-green-500/30 px-4">
+            <div class="max-w-6xl mx-auto py-4 flex justify-between items-center">
+                <a href="index.html" class="text-xl font-black tracking-wider text-green-400 font-mono gd-interactive gd-neon-text">&lt;FERREL.FS /&gt;</a>
+                <div class="flex space-x-2 md:space-x-4 font-bold text-xs md:text-sm">
+                    <a href="index.html" class="bg-green-500 text-slate-950 px-4 py-2 rounded-md shadow-[0_4px_0_#15803d] transition active:translate-y-1 active:shadow-none">Dashboard</a>
+                    <a href="background.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-md shadow-[0_4px_0_#334155] gd-interactive inline-block">My Background</a>
+                    <a href="certificates.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-md shadow-[0_4px_0_#334155] gd-interactive inline-block">Certificates</a>
                 </div>
-                <div>
-                    <label class="block text-xs font-mono text-slate-300 mb-1" for="message">Isi Pesan</label>
-                    <textarea name="message" id="message" rows="4" required placeholder="Halo Ferrel, saya tertarik dengan portofolio Anda..." 
-                              class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-green-400 resize-none"></textarea>
+            </div>
+        </nav>
+
+        <!-- HERO DASHBOARD SECTION -->
+        <header class="max-w-5xl mx-auto px-4 py-16 md:py-24 w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            
+            <!-- Kolom Informasi Diri -->
+            <div class="md:col-span-2 text-center md:text-left">
+                <div class="inline-block bg-green-950/70 border border-green-500/40 rounded-full px-4 py-1 text-green-400 font-mono text-xs uppercase tracking-widest mb-4 animate-pulse">
+                    🚀 READY TO LAUNCH // LEVEL: SOC ANALYST
                 </div>
+                <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-6 uppercase text-white">
+                    HI, I'M <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-green-500 gd-neon-text">FERREL FORTINOV</span>
+                </h1>
+                <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8 bg-slate-950/70 p-5 rounded-xl border border-slate-800/80 backdrop-blur-sm shadow-xl">
+                    Lulusan Teknik Jaringan Komputer dan Telekomunikasi (TJKT) dari SMK Wikrama Bogor dengan fokus utama pada penguatan infrastruktur IT Support dan analisis pertahanan siber. Siap mengoptimalkan pemantauan sistem, mitigasi insiden jaringan, serta bertindak responsif sebagai Junior SOC Analyst profesional.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <button onclick="toggleModal(); triggerClickBurst(event)" class="gd-interactive bg-green-400 hover:bg-green-300 text-slate-950 font-black px-8 py-4 rounded-xl text-lg tracking-wide uppercase shadow-[0_6px_0_#16a34a] cursor-pointer relative overflow-hidden">
+                        ✉️ Hubungi Saya
+                    </button>
+                    <a href="background.html" onclick="triggerClickBurst(event)" class="gd-interactive bg-slate-800/90 border-2 border-slate-700 hover:border-green-400 text-green-400 font-bold px-8 py-4 rounded-xl text-lg tracking-wide uppercase shadow-[0_6px_0_#1e293b] inline-block relative">
+                        🕹️ Lihat Background
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kolom Mini Game GD Stage & Box Animasi -->
+            <div class="flex flex-col items-center justify-center gap-6">
+                <!-- Box Utama Ikon Cyber -->
+                <div class="gd-interactive w-40 h-40 bg-gradient-to-br from-green-500 to-emerald-700 rounded-2xl border-4 border-white flex flex-col items-center justify-center text-5xl shadow-[0_0_40px_rgba(34,197,94,0.5)] cursor-pointer relative" onclick="triggerClickBurst(event)">
+                    💻
+                    <div class="absolute bottom-2 text-[10px] font-mono font-bold tracking-widest text-white/90 bg-slate-950/70 px-2 py-0.5 rounded">ONLINE</div>
+                </div>
+
+                <!-- MINI GAME COMPONENT -->
+                <div class="relative w-72 h-16 bg-slate-950/60 border-2 border-slate-800 rounded-xl overflow-hidden flex items-end opacity-90 shadow-inner">
+                    <span class="absolute top-1 left-2 font-mono text-[9px] text-slate-500 tracking-wider uppercase">GD Live Simulation</span>
+                    <div class="gd-cube w-5 h-5 bg-green-400 border-2 border-white rounded-sm mb-1 ml-10 shadow-[0_0_10px_rgba(34,197,94,0.8)] z-10"></div>
+                    <div class="gd-spike-1 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
+                    <div class="gd-spike-2 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
+                    <div class="gd-spike-3 absolute bottom-1 right-0 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[11px] border-b-rose-500"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500/50 via-emerald-500 to-green-500/50"></div>
+                </div>
+            </div>
+
+        </header>
+
+        <!-- TECHNICAL SKILLS SECTION (GAME STAGE TILES) -->
+        <section class="max-w-5xl mx-auto px-4 py-10 w-full">
+            <h2 class="text-2xl font-black font-mono mb-8 text-center md:text-left text-white tracking-wider uppercase flex items-center gap-2">
+                <span class="text-green-400">⚡</span> CORE COMPETENCIES & EXPERTISE
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-2xl">🛡️</span>
+                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">Security Operations</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">Implementasi arsitektur SIEM (Wazuh, Stellar Cyber), manajemen Log Analysis, Alert Triage, serta investigasi insiden keamanan jaringan.</p>
+                </div>
+                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-2xl">🌐</span>
+                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">Network Security Tools</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">Konfigurasi perangkat keamanan komersial Fortinet, monitoring paket via Wireshark, serta manajemen routing/VLAN lanjut menggunakan RouterOS MikroTik.</p>
+                </div>
+                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-2xl">🐧</span>
+                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">OS & Virtualization</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">Administrasi server berbasis Linux (Ubuntu/Debian Server) & Windows Server. Pengalaman orkestrasi virtualisasi Proxmox VE, VMware ESXi, dan kontainerisasi Docker.</p>
+                </div>
+                <div class="gd-panel-border gd-interactive p-6 rounded-2xl shadow-xl">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-2xl">☁️</span>
+                        <h3 class="text-green-400 font-mono font-black text-lg uppercase tracking-wide">Cloud & Infrastructure</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">Dasar-dasar tata kelola arsitektur Cloud (AWS & Google Cloud Platform) serta manajemen klaster basis data relasional seperti PostgreSQL dan MySQL.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAB DOKUMENTASI VISUAL (BUKTI NYATA NYETTING) -->
+        <section class="max-w-5xl mx-auto px-4 py-10 w-full">
+            <h2 class="text-2xl font-black font-mono mb-8 text-center md:text-left text-white tracking-wider uppercase flex items-center gap-2">
+                <span class="text-green-400">📊</span> LAB DOKUMENTASI & PROJEK AKTIVITAS
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card Projek 1 -->
+                <div class="gd-panel-border p-4 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-36 bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center text-slate-600 font-mono text-xs mb-3 select-none">
+                            [ SCREENSHOT WAZUH DASHBOARD ]
+                        </div>
+                        <h4 class="text-white font-mono font-bold text-sm uppercase">Monitoring SIEM Wazuh</h4>
+                    </div>
+                    <p class="text-slate-400 text-xs mt-2">Implementasi monitoring log dan deteksi serangan brute-force secara real-time pada virtual machine Ubuntu Server.</p>
+                </div>
+                <!-- Card Projek 2 -->
+                <div class="gd-panel-border p-4 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-36 bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center text-slate-600 font-mono text-xs mb-3 select-none">
+                            [ SCREENSHOT MIKROTIK TOPOLOGI ]
+                        </div>
+                        <h4 class="text-white font-mono font-bold text-sm uppercase">Routing & VLAN Mikrotik</h4>
+                    </div>
+                    <p class="text-slate-400 text-xs mt-2">Konfigurasi segmentasi jaringan menggunakan VLAN trunking, firewall filter, serta bandwidth management di infrastruktur lab lokal.</p>
+                </div>
+                <!-- Card Projek 3 -->
+                <div class="gd-panel-border p-4 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-36 bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center text-slate-600 font-mono text-xs mb-3 select-none">
+                            [ SCREENSHOT PROXMOX LAB ]
+                        </div>
+                        <h4 class="text-white font-mono font-bold text-sm uppercase">Virtualisasi Proxmox VE</h4>
+                    </div>
+                    <p class="text-slate-400 text-xs mt-2">Membangun arsitektur server virtualisasi mandiri untuk deploy service Docker container dan backup automation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- POP-UP KONTAK MODAL -->
+        <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
+            <div class="bg-slate-900 border-4 border-green-500 w-full max-w-md rounded-2xl p-6 shadow-[0_0_50px_rgba(34,197,94,0.4)] relative">
+                <button onclick="toggleModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-black text-2xl cursor-pointer transition">&times;</button>
                 
-                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-slate-950 font-bold py-2.5 rounded-lg text-sm transition duration-200 cursor-pointer">
-                    Kirim Sekarang
-                </button>
-            </form>
+                <h3 class="text-2xl font-black font-mono text-green-400 mb-2 uppercase tracking-wide">✉️ TRANSMIT MESSAGE</h3>
+                <p class="text-slate-400 text-xs mb-4 uppercase tracking-wider">// Jalur koneksi langsung menuju kotak masuk Ferrel.</p>
+                
+                <form action="https://formsubmit.co/ferrelfortinovs@gmail.com" method="POST" class="space-y-4">
+                    <input type="hidden" name="_to" value="ferrelfortinovs@gmail.com">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://zico1411.github.io/zico-s-portfolio/index.html">
+                    
+                    <div>
+                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase mb-1" for="email">Sender Email</label>
+                        <input type="email" name="email" id="email" required placeholder="nama@perusahaan.com" 
+                               class="w-full bg-slate-950 border-2 border-slate-700 focus:border-green-400 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none transition font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono font-bold text-slate-300 uppercase mb-1" for="message">Payload Data (Pesan)</label>
+                        <textarea name="message" id="message" rows="4" required placeholder="Tulis penawaran kerja atau pesan Anda di sini..." 
+                                  class="w-full bg-slate-950 border-2 border-slate-700 focus:border-green-400 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none transition resize-none"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-green-400 hover:bg-green-300 text-slate-950 font-black py-3 rounded-lg text-sm uppercase tracking-widest shadow-[0_4px_0_#16a34a] active:translate-y-1 active:shadow-none transition cursor-pointer">
+                        LAUNCH MESSAGE
+                    </button>
+                </form>
+            </div>
         </div>
+
+        <!-- FOOTER -->
+        <footer class="bg-slate-950/80 text-slate-500 text-center py-6 text-xs border-t-2 border-slate-900 font-mono tracking-widest uppercase mt-12">
+            <p>© 2026 FERREL FORTINOV SALIHAMIDZIC. DRIVEN BY CYBERSECURITY & ARCADE THEMES.</p>
+        </footer>
+
     </div>
 
-    <!-- TECHNICAL SKILLS SECTION -->
-    <section class="max-w-5xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold font-mono mb-8 text-center md:text-left border-b border-slate-800 pb-3">
-            <span class="text-green-400">01.</span> Technical Skills & Core Competencies
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Skill 1 -->
-            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 cyber-glow transition">
-                <h3 class="text-green-400 font-mono font-bold mb-3">🛡️ Security Operations</h3>
-                <p class="text-slate-400 text-sm">SIEM (Wazuh, Stellar Cyber), Log Analysis, Alert Triage, Incident Investigation.</p>
-            </div>
-            <!-- Skill 2 -->
-            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 cyber-glow transition">
-                <h3 class="text-green-400 font-mono font-bold mb-3">🌐 Security & Network Tools</h3>
-                <p class="text-slate-400 text-sm">Fortinet, Wireshark, MikroTik (VLAN, Advanced Routing), TCP/IP & DNS.</p>
-            </div>
-            <!-- Skill 3 -->
-            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 cyber-glow transition">
-                <h3 class="text-green-400 font-mono font-bold mb-3">🐧 Operating Systems & Virtualization</h3>
-                <p class="text-slate-400 text-sm">Linux (Ubuntu/Debian Server Administration), Windows Server, Proxmox VE, VMware ESXi, Docker.</p>
-            </div>
-            <!-- Skill 4 -->
-            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 cyber-glow transition">
-                <h3 class="text-green-400 font-mono font-bold mb-3">☁️ Cloud & Databases</h3>
-                <p class="text-slate-400 text-sm">AWS, Google Cloud Platform, Postgres, MySQL.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 text-slate-500 text-center py-8 text-xs border-t border-slate-900 mt-20 font-mono">
-        <p>© 2026 Ferrel Fortinov Salihamidzic. Built with HTML & Tailwind CSS.</p>
-    </footer>
-
-    <!-- JAVASCRIPT UNTUK MODAL POP-UP -->
+    <!-- JAVASCRIPT FOR PARTICLE EFFECT -->
     <script>
         function toggleModal() {
             const modal = document.getElementById('contactModal');
@@ -187,7 +288,37 @@
                 modal.classList.add('hidden');
             }
         }
-    </script>
 
+        /* LEDAKAN KOTAK HIJAU PAS DIKLIK */
+        function triggerClickBurst(e) {
+            const container = document.body;
+            
+            for (let i = 0; i < 16; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('gd-sparkle');
+                
+                const dimension = Math.random() * 8 + 4;
+                sparkle.style.width = `${dimension}px`;
+                sparkle.style.height = `${dimension}px`;
+                
+                sparkle.style.left = `${e.clientX + window.scrollX}px`;
+                sparkle.style.top = `${e.clientY + window.scrollY}px`;
+                
+                const angularDirection = Math.random() * Math.PI * 2;
+                const distanceForce = Math.random() * 90 + 50;
+                const mx = Math.cos(angularDirection) * distanceForce;
+                const my = Math.sin(angularDirection) * distanceForce;
+                
+                sparkle.style.setProperty('--mx', `${mx}px`);
+                sparkle.style.setProperty('--my', `${my}px`);
+                
+                container.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 550);
+            }
+        }
+    </script>
 </body>
 </html>
