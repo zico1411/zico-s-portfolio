@@ -11,26 +11,42 @@
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
         }
 
-        /* --- ANIMASI GEOMETRY DASH CUSTOM --- */
+        /* --- GEOMETRY DASH RENEWED ANIMATION --- */
         @keyframes gd-jump {
             0% { transform: translateY(0) rotate(0deg); }
-            40% { transform: translateY(-35px) rotate(45deg); }
-            50% { transform: translateY(-35px) rotate(45deg); }
-            90% { transform: translateY(0) rotate(90deg); }
+            45% { transform: translateY(-32px) rotate(45deg); }
+            55% { transform: translateY(-32px) rotate(45deg); }
+            95% { transform: translateY(0) rotate(90deg); }
             100% { transform: translateY(0) rotate(90deg); }
         }
 
-        @keyframes obstacle-move {
-            0% { transform: translateX(250px); }
-            100% { transform: translateX(-50px); }
+        @keyframes obstacles-loop {
+            0% { transform: translateX(280px); }
+            100% { transform: translateX(-60px); }
         }
 
         .gd-cube {
-            animation: gd-jump 0.8s infinite linear;
+            animation: gd-jump 0.75s infinite linear;
         }
 
-        .gd-spike {
-            animation: obstacle-move 1.6s infinite linear;
+        /* Animasi duri dengan jeda waktu agar jalannya gantian */
+        .gd-spike-1 {
+            animation: obstacles-loop 2s infinite linear;
+        }
+        .gd-spike-2 {
+            animation: obstacles-loop 2s infinite linear;
+            animation-delay: 0.65s;
+        }
+        .gd-spike-3 {
+            animation: obstacles-loop 2s infinite linear;
+            animation-delay: 1.3s;
+        }
+
+        /* Efek latar belakang kotak-kotak game */
+        .gd-bg-grid {
+            background-size: 20px 20px;
+            background-image: linear-gradient(to right, rgba(51, 65, 85, 0.15) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(51, 65, 85, 0.15) 1px, transparent 1px);
         }
     </style>
 </head>
@@ -64,13 +80,22 @@
                 <a href="background.html" class="border border-slate-700 hover:border-green-400 text-slate-300 hover:text-green-400 font-medium px-6 py-3 rounded-lg transition duration-200">Lihat Background</a>
             </div>
 
-            <!-- KOMPONEN MINI ANIMASI GEOMETRY DASH -->
-            <div class="relative w-64 h-16 border-b-2 border-slate-700 overflow-hidden mt-8 mx-auto md:mx-0 flex items-end opacity-90">
-                <!-- Kubus Hijau Khas GD dengan Efek Glow Siber -->
-                <div class="gd-cube w-6 h-6 bg-green-400 border-2 border-white rounded-sm mb-0.5 ml-10 shadow-[0_0_12px_rgba(34,197,94,0.8)]"></div>
+            <!-- MINI GAME STAGE GEOMETRY DASH -->
+            <div class="relative w-72 h-20 bg-slate-950/40 border border-slate-800 rounded-xl overflow-hidden mt-8 mx-auto md:mx-0 flex items-end opacity-90 gd-bg-grid shadow-inner">
                 
-                <!-- Rintangan Duri Segitiga Merah -->
-                <div class="gd-spike absolute bottom-0 right-0 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[14px] border-b-rose-500"></div>
+                <!-- Label Info Pojok Kiri Atas -->
+                <span class="absolute top-1 left-2 font-mono text-[10px] text-slate-500 tracking-widest uppercase">GD Level: SOC Analyst</span>
+                
+                <!-- Karakter Kubus Hijau -->
+                <div class="gd-cube w-6 h-6 bg-green-400 border-2 border-white rounded-sm mb-1 ml-12 shadow-[0_0_12px_rgba(34,197,94,0.85)] z-10"></div>
+                
+                <!-- Jalur Rintangan Duri Beruntun -->
+                <div class="gd-spike-1 absolute bottom-1 right-0 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[13px] border-b-rose-500"></div>
+                <div class="gd-spike-2 absolute bottom-1 right-0 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[13px] border-b-rose-500"></div>
+                <div class="gd-spike-3 absolute bottom-1 right-0 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[13px] border-b-rose-500"></div>
+                
+                <!-- Garis Tanah Tebal -->
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500/50 via-emerald-500 to-green-500/50"></div>
             </div>
         </div>
         <div class="mt-10 md:mt-0 md:w-1/3 flex justify-center">
