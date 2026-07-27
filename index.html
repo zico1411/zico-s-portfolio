@@ -9,37 +9,6 @@
     <style>
         /* --- CORE GEOMETRY DASH ARCADE THEME --- */
         
-        /* Sembunyikan kursor bawaan untuk diganti custom cursor neon */
-        body {
-            cursor: none;
-        }
-        a, button, input, textarea, .gd-interactive {
-            cursor: none;
-        }
-
-        /* Custom Cursor Kotak Neon ala Geometry Dash */
-        .custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 20px;
-            height: 20px;
-            background-color: #22c55e;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 10px #22c55e, 0 0 20px #10b981;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: width 0.1s, height 0.1s, background-color 0.1s;
-            z-index: 99999;
-            border-radius: 4px;
-        }
-
-        body.is-clicking .custom-cursor {
-            transform: translate(-50%, -50%) scale(0.7);
-            background-color: #ffffff;
-            box-shadow: 0 0 15px #ffffff;
-        }
-
         /* Animasi Grid Level Editor yang Bergerak Konstan */
         @keyframes scroll-grid {
             0% { background-position: 0 0; }
@@ -150,9 +119,6 @@
 </head>
 <body class="gd-main-bg text-slate-100 font-sans min-h-screen relative overflow-x-hidden select-none">
 
-    <!-- Custom Cursor Elemen -->
-    <div class="custom-cursor" id="cursor"></div>
-
     <!-- Efek Bayangan Gelap Latar Belakang -->
     <div class="gd-vignette"></div>
 
@@ -186,7 +152,7 @@
                     Lulusan Teknik Jaringan Komputer dan Telekomunikasi (TJKT) dari SMK Wikrama Bogor dengan fokus utama pada penguatan infrastruktur IT Support dan analisis pertahanan siber. Siap mengoptimalkan pemantauan sistem, mitigasi insiden jaringan, serta bertindak responsif sebagai Junior SOC Analyst profesional.
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <button onclick="toggleModal(); triggerClickBurst(event)" class="gd-interactive bg-green-400 hover:bg-green-300 text-slate-950 font-black px-8 py-4 rounded-xl text-lg tracking-wide uppercase shadow-[0_6px_0_#16a34a] relative overflow-hidden">
+                    <button onclick="toggleModal(); triggerClickBurst(event)" class="gd-interactive bg-green-400 hover:bg-green-300 text-slate-950 font-black px-8 py-4 rounded-xl text-lg tracking-wide uppercase shadow-[0_6px_0_#16a34a] cursor-pointer relative overflow-hidden">
                         ✉️ Hubungi Saya
                     </button>
                     <a href="background.html" onclick="triggerClickBurst(event)" class="gd-interactive bg-slate-800/90 border-2 border-slate-700 hover:border-green-400 text-green-400 font-bold px-8 py-4 rounded-xl text-lg tracking-wide uppercase shadow-[0_6px_0_#1e293b] inline-block relative">
@@ -197,7 +163,7 @@
 
             <!-- Kolom Visualisasi Animasi SOC Lab Isometrik Interaktif -->
             <div class="flex flex-col items-center justify-center w-full">
-                <div class="w-full max-w-[320px] md:max-w-none bg-slate-950/40 border-2 border-slate-800/60 rounded-2xl p-4 backdrop-blur-sm shadow-2xl relative gd-interactive" onclick="triggerClickBurst(event)">
+                <div class="w-full max-w-[320px] md:max-w-none bg-slate-950/40 border-2 border-slate-800/60 rounded-2xl p-4 backdrop-blur-sm shadow-2xl relative cursor-pointer gd-interactive" onclick="triggerClickBurst(event)">
                     <svg viewBox="0 0 500 390" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="shieldFillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -318,7 +284,7 @@
         <!-- POP-UP KONTAK MODAL -->
         <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
             <div class="bg-slate-900 border-4 border-green-500 w-full max-w-md rounded-2xl p-6 shadow-[0_0_50px_rgba(34,197,94,0.4)] relative">
-                <button onclick="toggleModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-black text-2xl transition">&times;</button>
+                <button onclick="toggleModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-black text-2xl cursor-pointer transition">&times;</button>
                 
                 <h3 class="text-2xl font-black font-mono text-green-400 mb-2 uppercase tracking-wide">✉️ TRANSMIT MESSAGE</h3>
                 <p class="text-slate-400 text-xs mb-4 uppercase tracking-wider">// Jalur koneksi langsung menuju kotak masuk Ferrel.</p>
@@ -338,7 +304,7 @@
                                   class="w-full bg-slate-950 border-2 border-slate-700 focus:border-green-400 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none transition resize-none"></textarea>
                     </div>
                     
-                    <button type="submit" class="w-full bg-green-400 hover:bg-green-300 text-slate-950 font-black py-3 rounded-lg text-sm uppercase tracking-widest shadow-[0_4px_0_#16a34a] active:translate-y-1 active:shadow-none transition">
+                    <button type="submit" class="w-full bg-green-400 hover:bg-green-300 text-slate-950 font-black py-3 rounded-lg text-sm uppercase tracking-widest shadow-[0_4px_0_#16a34a] active:translate-y-1 active:shadow-none transition cursor-pointer">
                         LAUNCH MESSAGE
                     </button>
                 </form>
@@ -352,24 +318,8 @@
 
     </div>
 
-    <!-- JAVASCRIPT FOR PARTICLE EFFECT, MODAL, & CUSTOM CURSOR -->
+    <!-- JAVASCRIPT FOR PARTICLE EFFECT & MODAL -->
     <script>
-        const cursor = document.getElementById('cursor');
-
-        // Menggerakkan kursor kustom mengikuti koordinat mouse
-        window.addEventListener('mousemove', (e) => {
-            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-        });
-
-        // Efek klik pada kursor
-        window.addEventListener('mousedown', () => {
-            document.body.classList.add('is-clicking');
-        });
-
-        window.addEventListener('mouseup', () => {
-            document.body.classList.remove('is-clicking');
-        });
-
         function toggleModal() {
             const modal = document.getElementById('contactModal');
             if (modal.classList.contains('hidden')) {
